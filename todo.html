@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose an Activity</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(180deg, #fed7aa 0%, #fbbf24 25%, #f59e0b 50%, #f97316 75%, #ea580c 100%);
+      color: #102a43;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle 800px at 10% 40%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                  radial-gradient(circle 700px at 90% 70%, rgba(255,255,255,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .card {
+      width: min(100%, 560px);
+      background: rgba(255, 255, 255, 0.97);
+      border-radius: 32px;
+      box-shadow: 0 30px 80px rgba(15, 23, 42, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      padding: 44px 36px;
+      text-align: center;
+      animation: slideUp 0.4s ease-out;
+      position: relative;
+      z-index: 1;
+    }
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2.2rem, 3vw, 2.8rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #f97316, #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      margin: 0 0 36px;
+      color: #64748b;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      font-weight: 500;
+    }
+    .options {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .option-btn {
+      display: block;
+      padding: 18px 28px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+    }
+    .option-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(99, 102, 241, 0.35);
+    }
+    .option-btn:active {
+      transform: translateY(-1px);
+    }
+    .baseball {
+      background: linear-gradient(135deg, #ec4899, #d946ef);
+    }
+    .baseball:hover {
+      box-shadow: 0 16px 32px rgba(236, 72, 153, 0.35);
+    }
+    .dinner {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+    }
+    .dinner:hover {
+      box-shadow: 0 16px 32px rgba(249, 115, 22, 0.35);
+    }
+    .movie {
+      background: linear-gradient(135deg, #06b6d4, #0ea5e9);
+    }
+    .movie:hover {
+      box-shadow: 0 16px 32px rgba(14, 165, 233, 0.35);
+    }
+    .golf {
+      background: linear-gradient(135deg, #10b981, #059669);
+    }
+    .golf:hover {
+      box-shadow: 0 16px 32px rgba(16, 185, 129, 0.35);
+    }
+    .back {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: #f3f4f6;
+      color: #475569;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+    }
+    .back:hover {
+      background: #e5e7eb;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>What Should We Do?</h1>
+    <p class="subtitle">Pick an activity for our date night.</p>
+    <div class="options">
+      <a href="pickup.html" class="option-btn baseball">⚾ Your Dad's Baseball Game</a>
+      <a href="#dinner" class="option-btn dinner">🍽️ Dinner Out</a>
+      <a href="#movie" class="option-btn movie">🎬 Movie Night</a>
+      <a href="#golf" class="option-btn golf">⛳ Mini Golf</a>
+    </div>
+    <a href="yes.html" class="back">← Back</a>
+  </div>
+  <script>
+    const buttons = document.querySelectorAll('.option-btn:not(.baseball)');
+    const allButtons = document.querySelectorAll('.option-btn');
+    
+    // Make non-baseball buttons fade out when clicked
+    buttons.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        btn.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => {
+          btn.style.pointerEvents = 'none';
+        }, 300);
+      });
+    });
+    
+    // Add hover lift effect to all buttons
+    allButtons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        if (!btn.classList.contains('baseball')) return;
+        btn.style.transform = 'translateY(-5px) scale(1.02)';
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  </script>
+  <style>
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+    }
+  </style>
+</body>
+</html>
